@@ -27,6 +27,8 @@ V0z = V0*cos(gama); %Velocidad z
 
 hold on;
 
+%%%%%%%%%%% Euler %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %Determinar los parámetros iniciales para el *Método de Euler*
 t = 0;
 intervalo = 1;
@@ -48,7 +50,7 @@ x_posicion = x0;
 z_velocidad = V0z;
 z_posicion = z0;
 
-plot3(x_posicion,z_posicion,y_posicion,'-o')
+plot3(x_posicion,z_posicion,y_posicion,'->')
     %establecer las iteraciones por medio del método de euler
 
 while y_posicion(length(y_posicion)) > 0
@@ -62,40 +64,43 @@ while y_posicion(length(y_posicion)) > 0
     
     z_velocidad = [z_velocidad; z_velocidad(length(z_velocidad)) - (b * z_velocidad(length(z_velocidad)) / masa)*intervalo];
     z_posicion = [z_posicion; z_posicion(length(z_posicion)) - z_velocidad(length(z_velocidad))*intervalo];
-    plot3(x_posicion,z_posicion,y_posicion,'-o')
+    plot3(x_posicion,z_posicion,y_posicion,'->')
     pause(0.1)
     hold on
 end
 
-
-%modelación con el método analítico
+%%%%%%%%%%%%%%%%%%%%%% FALTA CORREGIR LA GRAFICACIÓN %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%% Método analítico %%%%%%%%%%%%%%%%%%%%%%%
+% Modelación con el método analítico
 
 syms y_2(tiempo) x_2(tiempo) z_2(tiempo) vel b m
 
 vel = diff(y_2,tiempo);
 
 % posición y
-eqn_y = diff(y_2,tiempo,2) == -g + b*(vel)/m;
+eqn_y = diff(y_2,tiempo,2) == -g - b*(vel)/m;
 cond_y = [y_2(0)==y0, vel(0)==V0y];
 ySol(tiempo) = dsolve(eqn_y,cond_y);
 
 vel = diff(x_2,tiempo);
 
 % posición x
-eqn_x = diff(x_2,tiempo,2) == b*(vel)/m;
+eqn_x = diff(x_2,tiempo,2) == -b*(vel)/m;
 cond_x = [x_2(0)==x0, vel(0)==V0x];
 xSol(tiempo) = dsolve(eqn_x,cond_x);
 
 vel = diff(z_2,tiempo);
 
 % posición z
-eqn_z = diff(z_2,tiempo,2) == b*(vel)/m;
+eqn_z = diff(z_2,tiempo,2) == -b*(vel)/m;
 cond_z = [z_2(0)==z0, vel(0)==V0z];
 zSol(tiempo) = dsolve(eqn_z,cond_z);
-tiempo = 0;
-y = y0;
-x = xSol(t);
-z = zSol(t);
+
+t = 0;
+tiempoFinal = 10;
+
+fplot3(zSol,xSol,ySol,[tiempo tiempoFinal], '-o')
+
 while y(length(y)) > 0
     tiempo = tiempo + intervalo;
     y = [y;double(ySol(tiempo))];
@@ -106,8 +111,20 @@ while y(length(y)) > 0
     hold on
 end
 
-%comenzar con las iteraciones y graficación simultanea
+%%%%%% TO DO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%% Surf de área de riesgo %%%%%%%%%%%%%%%%%%%%%
+% Determinar un caso "máximo" (Con parámetros máximos)
+%Dados esos parámtros, determinar una matriz de área del caso
+
+%%% Extra %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% Experimentar con un posible %%%%%%%%%%%%%%%%%%%% 
+% poblado, dentro de la zona de riesgo %%%%%%%%%%%%%%%
+% Determinar un área pequeña del tamaño de un posible
+% En riesgo
+
+%%%Simulación del tiro parabólico sin fricción%%%%%%%%%%
+%comenzar con las iteraciones y graficación simultanea
 %{
 while y > 0
     t = t + 1;
