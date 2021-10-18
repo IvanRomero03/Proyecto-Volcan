@@ -30,10 +30,12 @@ hold on;
 %%%%%%%%%%% Euler %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %Determinar los parámetros iniciales para el *Método de Euler*
+%%%%%%%%%%%%Checar esto%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 t = 0;
 intervalo = 1;
-b = 0.3;
-masa = 80;
+%%%%%% Falta conseguir un coeficiente de fricción %%%%%%%%
+b = 0.01;
+masa = randi([2 15],1);
 
 %Para y (altura)
 y_velocidad = V0y;
@@ -50,7 +52,7 @@ z_velocidad = V0z;
 z_posicion = z0;
 
 plot3(x_posicion,z_posicion,y_posicion,'->')
-    %establecer las iteraciones por medio del método de euler
+%establecer las iteraciones por medio del método de euler
 
 while y_posicion(length(y_posicion)) > 0
     t = t + intervalo;
@@ -125,6 +127,12 @@ while y(length(y)) > 0
 end
 
 %%%%%% TO DO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%% Marcar área de impacto %%%%%%%%%%%%%%%%%%%%%%%
+% Tomar las coordenadas de impacto y hacer un circulo con el área de
+% peligro en ese impacto
+%%%% OPCIONAL 
+% Hacer un archivo que guarde las muestras 
 
 %%%%%%%%%% Surf de área de riesgo %%%%%%%%%%%%%%%%%%%%%
 % Determinar un caso "máximo" (Con parámetros máximos)
