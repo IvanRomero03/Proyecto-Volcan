@@ -18,7 +18,7 @@ alpha = randi([0, 360],1); %angulo alpha
 beta = randi([30, 150],1); %angulo beta
 gama = randi([0, 360],1); %angulo gama
 x0 = 0; %psoicion inicial x
-y0 = 5492; %posicion inicial y (altura de popocatepetl)
+y0 = 5452; %posicion inicial y (altura de popocatepetl)
 z0 = 0; %posicion inicial z
 g = 9.8; %gravedad
 V0x = V0*cos(alpha); %Velocidad x
@@ -32,9 +32,8 @@ hold on;
 %Determinar los parámetros iniciales para el *Método de Euler*
 t = 0;
 intervalo = 1;
-b = 0.5;
+b = 0.3;
 masa = 80;
-pendiente = 0;
 
 %Para y (altura)
 y_velocidad = V0y;
@@ -73,7 +72,9 @@ end
 %%%%%%%%%%%%%%%%%%% Método analítico %%%%%%%%%%%%%%%%%%%%%%%
 % Modelación con el método analítico
 
-syms y_2(tiempo) x_2(tiempo) z_2(tiempo) vel b m
+syms y_2(tiempo) x_2(tiempo) z_2(tiempo) vel 
+
+m = masa;
 
 vel = diff(y_2,tiempo);
 
@@ -86,26 +87,38 @@ vel = diff(x_2,tiempo);
 
 % posición x
 eqn_x = diff(x_2,tiempo,2) == -b*(vel)/m;
-cond_x = [x_2(0)==x0, vel(0)==V0x];
+cond_x = [x_2(0)==x0, vel(0)==-V0x];
 xSol(tiempo) = dsolve(eqn_x,cond_x);
 
 vel = diff(z_2,tiempo);
 
 % posición z
 eqn_z = diff(z_2,tiempo,2) == -b*(vel)/m;
-cond_z = [z_2(0)==z0, vel(0)==V0z];
+cond_z = [z_2(0)==z0, vel(0)==-V0z];
 zSol(tiempo) = dsolve(eqn_z,cond_z);
 
-t = 0;
-tiempoFinal = 10;
+ti = 0;
+t = intervalo;
 
-fplot3(zSol,xSol,ySol,[tiempo tiempoFinal], '-o')
+DeltaT = 0:intervalo:t;
+ySyms = feval(ySol,DeltaT);
+xSyms = feval(xSol, DeltaT);
+zSyms = feval(zSol, DeltaT);
+y = double(ySyms);
+x = double(xSyms);
+z = double(zSyms);
+
+plot3(x,z,y,'-o')
 
 while y(length(y)) > 0
-    tiempo = tiempo + intervalo;
-    y = [y;double(ySol(tiempo))];
-    x = [x;double(xSol(tiempo))];
-    z = [z;double(zSol(tiempo))];
+    t = t + intervalo;
+    DeltaT = (t - intervalo):intervalo:t;
+    ySyms = feval(ySol,DeltaT);
+    xSyms = feval(xSol, DeltaT);
+    zSyms = feval(zSol, DeltaT);
+    y = [y;double(ySyms)];
+    x = [x;double(xSyms)];
+    z = [z;double(zSyms)];
     plot3(x,z,y,'-o')
     pause(0.1)
     hold on
