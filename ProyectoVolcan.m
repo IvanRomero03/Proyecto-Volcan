@@ -34,7 +34,7 @@ hold on;
 t = 0;
 intervalo = 1;
 %%%%%% Falta conseguir un coeficiente de fricción %%%%%%%%
-b = 0.4;
+b = 0.3;
 masa = randi([2 15],1);
 
 %Para y (altura)
