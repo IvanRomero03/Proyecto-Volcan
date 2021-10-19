@@ -9,14 +9,14 @@ r = linspace(0.03*pi,pi) ;
     Z = -R*5000;
     Z = Z+5700;
     surf(X,Y,Z)
-    axis([-6000 6000 -6000 6000 0 7000])
+    axis([-15000 15000 -15000 15000 0 10000])
     colormap(hot)
 
 %inicializar nuestros valores
-V0 = randi([83, 139],1); %velocidad inicial m/s
-alpha = randi([0, 360],1); %angulo alpha
-beta = randi([30, 150],1); %angulo beta
-gama = randi([0, 360],1); %angulo gama
+V0 = randi([280, 1000],1); %velocidad inicial m/s
+alpha = deg2rad(randi([0, 360],1)); %angulo alpha
+beta = deg2rad(randi([30, 150],1)); %angulo beta
+gama = deg2rad(randi([0, 360],1)); %angulo gama
 x0 = 0; %psoicion inicial x
 y0 = 5452; %posicion inicial y (altura de popocatepetl)
 z0 = 0; %posicion inicial z
@@ -34,7 +34,7 @@ hold on;
 t = 0;
 intervalo = 1;
 %%%%%% Falta conseguir un coeficiente de fricción %%%%%%%%
-b = 0.01;
+b = 0.4;
 masa = randi([2 15],1);
 
 %Para y (altura)
