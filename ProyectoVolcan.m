@@ -1,3 +1,14 @@
+% Inicializar el area de riesgo
+%y^2 + x^2 = 20000^2;
+Color = [0.8500 0.3250 0.0980];
+Radio = 20000;
+ang=0:0.01:2*pi; 
+xp=Radio.*cos(ang);
+yp=Radio.*sin(ang);
+patch(xp,yp,Color)
+hold on
+
+
 %inicializar nuestra cónica
 hold on
 
@@ -10,10 +21,12 @@ r = linspace(0.03*pi,pi) ;
     Z = Z+5700;
     surf(X,Y,Z)
     axis([-15000 15000 -15000 15000 0 10000])
+    view([50 30 20])
+    grid on
     colormap(hot)
 
 %inicializar nuestros valores
-V0 = randi([280, 1000],1); %velocidad inicial m/s
+V0 = randi([300, 500],1); %velocidad inicial m/s
 alpha = deg2rad(randi([0, 360],1)); %angulo alpha
 beta = deg2rad(randi([30, 150],1)); %angulo beta
 gama = deg2rad(randi([0, 360],1)); %angulo gama
@@ -36,7 +49,6 @@ intervalo = 1;
 %%%%%% Falta conseguir un coeficiente de fricción %%%%%%%%
 b = 0.3;
 masa = randi([2 15],1);
-
 %Para y (altura)
 y_velocidad = V0y;
 y_aceleracion = g;
@@ -70,7 +82,7 @@ while y_posicion(length(y_posicion)) > 0
     hold on
 end
 
-%%%%%%%%%%%%%%%%%%%%%% FALTA CORREGIR LA GRAFICACIÓN %%%%%%%%%%%%%%%%%%%
+
 %%%%%%%%%%%%%%%%%%% Método analítico %%%%%%%%%%%%%%%%%%%%%%%
 % Modelación con el método analítico
 
@@ -134,9 +146,25 @@ end
 %%%% OPCIONAL 
 % Hacer un archivo que guarde las muestras 
 
+x_c = x_posicion(length(x_posicion))- 200
+z_c = z_posicion(length(z_posicion))- 200
+pos = [x_c z_c 400 400]; 
+rectangle('Position',pos,'Curvature',[1 1],'EdgeColor','b', 'LineWidth',3)
+M2 = [ 0 x_posicion(length(x_posicion)) z_posicion(length(z_posicion))];
+%T = array2table(M2,'VariableNames',{'y','x','z'})
+%[nombre, direccion] = uiputfile({'*.txt','Posiciones de Impacto'},'Guardar Como')
+%writetable(T, [direccion,nombre],' | ' )
+fName = 'Muestras.txt';
+fid = fopen(fName,'w');            % abrir archivo
+fprintf(fid,'%f %f %f \n',M2); 
+fclose(fid);
+
+
 %%%%%%%%%% Surf de área de riesgo %%%%%%%%%%%%%%%%%%%%%
 % Determinar un caso "máximo" (Con parámetros máximos)
 %Dados esos parámtros, determinar una matriz de área del caso
+% Listo
+
 
 %%% Extra %%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%% Experimentar con un posible %%%%%%%%%%%%%%%%%%%% 
