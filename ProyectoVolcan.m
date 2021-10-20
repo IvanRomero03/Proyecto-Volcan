@@ -21,7 +21,7 @@ r = linspace(0.03*pi,pi) ;
     Z = Z+5700;
     surf(X,Y,Z)
     axis([-15000 15000 -15000 15000 0 10000])
-    view([50 30 20])
+    view([50 30 90])
     grid on
     colormap(hot)
 
@@ -73,10 +73,10 @@ while y_posicion(length(y_posicion)) > 0
     y_posicion = [y_posicion; y_posicion(length(y_posicion)) + y_velocidad(length(y_velocidad))*intervalo];
     
     x_velocidad = [x_velocidad; x_velocidad(length(x_velocidad)) - (b * x_velocidad(length(x_velocidad)) / masa)*intervalo];
-    x_posicion = [x_posicion; x_posicion(length(x_posicion)) - x_velocidad(length(x_velocidad))*intervalo];
+    x_posicion = [x_posicion; x_posicion(length(x_posicion)) + x_velocidad(length(x_velocidad))*intervalo];
     
     z_velocidad = [z_velocidad; z_velocidad(length(z_velocidad)) - (b * z_velocidad(length(z_velocidad)) / masa)*intervalo];
-    z_posicion = [z_posicion; z_posicion(length(z_posicion)) - z_velocidad(length(z_velocidad))*intervalo];
+    z_posicion = [z_posicion; z_posicion(length(z_posicion)) + z_velocidad(length(z_velocidad))*intervalo];
     plot3(x_posicion,z_posicion,y_posicion,'->')
     pause(0.1)
     hold on
@@ -101,14 +101,14 @@ vel = diff(x_2,tiempo);
 
 % posición x
 eqn_x = diff(x_2,tiempo,2) == -b*(vel)/m;
-cond_x = [x_2(0)==x0, vel(0)==-V0x];
+cond_x = [x_2(0)==x0, vel(0)==V0x];
 xSol(tiempo) = dsolve(eqn_x,cond_x);
 
 vel = diff(z_2,tiempo);
 
 % posición z
 eqn_z = diff(z_2,tiempo,2) == -b*(vel)/m;
-cond_z = [z_2(0)==z0, vel(0)==-V0z];
+cond_z = [z_2(0)==z0, vel(0)==V0z];
 zSol(tiempo) = dsolve(eqn_z,cond_z);
 
 ti = 0;
