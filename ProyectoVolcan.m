@@ -146,8 +146,8 @@ end
 %%%% OPCIONAL 
 % Hacer un archivo que guarde las muestras 
 
-x_c = x_posicion(length(x_posicion))- 200
-z_c = z_posicion(length(z_posicion))- 200
+x_c = x_posicion(length(x_posicion))- 200;
+z_c = z_posicion(length(z_posicion))- 200;
 pos = [x_c z_c 400 400]; 
 rectangle('Position',pos,'Curvature',[1 1],'EdgeColor','b', 'LineWidth',3)
 M2 = [ 0 x_posicion(length(x_posicion)) z_posicion(length(z_posicion))];
@@ -155,10 +155,10 @@ M2 = [ 0 x_posicion(length(x_posicion)) z_posicion(length(z_posicion))];
 %[nombre, direccion] = uiputfile({'*.txt','Posiciones de Impacto'},'Guardar Como')
 %writetable(T, [direccion,nombre],' | ' )
 fName = 'Muestras.txt';
-fid = fopen(fName,'w');            % abrir archivo
-fprintf(fid,'%f %f %f \n',M2); 
-fclose(fid);
+fid = fopen(fName,'a');            % abrir archivo
+fprintf(fid, '%f %f %f \n',M2);
 
+fclose(fid);
 
 %%%%%%%%%% Surf de área de riesgo %%%%%%%%%%%%%%%%%%%%%
 % Determinar un caso "máximo" (Con parámetros máximos)
