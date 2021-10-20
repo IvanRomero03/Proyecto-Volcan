@@ -20,7 +20,7 @@ r = linspace(0.03*pi,pi) ;
     Z = -R*5000;
     Z = Z+5700;
     surf(X,Y,Z)
-    axis([-15000 15000 -15000 15000 0 10000])
+    axis([-18000 18000 -18000 18000 0 11000])
     view([50 30 90])
     grid on
     colormap(hot)
@@ -145,6 +145,7 @@ end
 % peligro en ese impacto
 %%%% OPCIONAL 
 % Hacer un archivo que guarde las muestras 
+% Listo
 
 x_c = x_posicion(length(x_posicion))- 200;
 z_c = z_posicion(length(z_posicion))- 200;
@@ -171,7 +172,7 @@ fclose(fid);
 % poblado, dentro de la zona de riesgo %%%%%%%%%%%%%%%
 % Determinar un área pequeña del tamaño de un posible
 % En riesgo
-
+% Dos poblados cercanos: Xalitzintla 16km, San Pedro 12km (San pedro más chico)
 %%%Simulación del tiro parabólico sin fricción%%%%%%%%%%
 %comenzar con las iteraciones y graficación simultanea
 %{
