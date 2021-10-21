@@ -8,6 +8,16 @@ yp=Radio.*sin(ang);
 patch(xp,yp,Color)
 hold on
 
+% Poblados:
+% Xalitzintla 13km (1.1km de ancho por 0.5km de alto)
+%puntosX = [4.95 6.05 11.3 12.03];
+rectangle('Position',[4950 11300 1100 500],'FaceColor','y')
+
+% San Pedro 11.4km (2.5km * 2km)
+% Puntos = {2.24, -11.72, 5.14 , -9.72}
+
+rectangle('Position',[2240 -11720 2500 2000],'FaceColor','y')
+
 
 %inicializar nuestra cónica
 hold on
@@ -21,7 +31,7 @@ r = linspace(0.03*pi,pi) ;
     Z = Z+5700;
     surf(X,Y,Z)
     axis([-18000 18000 -18000 18000 0 11000])
-    view([50 30 90])
+    view([50 30 91])
     grid on
     colormap(hot)
 
@@ -173,6 +183,8 @@ fclose(fid);
 % Determinar un área pequeña del tamaño de un posible
 % En riesgo
 % Dos poblados cercanos: Xalitzintla 13km (1.1km de ancho por 0.5km de alto), San Pedro 11.4km (2.5km * 2km)
+
+
 %%%Simulación del tiro parabólico sin fricción%%%%%%%%%%
 %comenzar con las iteraciones y graficación simultanea
 %{
