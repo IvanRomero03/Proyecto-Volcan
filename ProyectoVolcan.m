@@ -34,6 +34,10 @@ r = linspace(0.03*pi,pi) ;
     view([50 30 91])
     grid on
     colormap(hot)
+    %title('Caída libre')
+    xlabel('Eje x');
+    ylabel('Eje y');
+    zlabel('Altura');
 
 %inicializar nuestros valores
 V0 = randi([300, 500],1); %velocidad inicial m/s
