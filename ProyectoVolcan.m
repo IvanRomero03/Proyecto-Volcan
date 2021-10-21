@@ -172,7 +172,7 @@ fclose(fid);
 % poblado, dentro de la zona de riesgo %%%%%%%%%%%%%%%
 % Determinar un área pequeña del tamaño de un posible
 % En riesgo
-% Dos poblados cercanos: Xalitzintla 16km, San Pedro 12km (San pedro más chico)
+% Dos poblados cercanos: Xalitzintla 13km (1.1km de ancho por 0.5km de alto), San Pedro 11.4km (2.5km * 2km)
 %%%Simulación del tiro parabólico sin fricción%%%%%%%%%%
 %comenzar con las iteraciones y graficación simultanea
 %{
