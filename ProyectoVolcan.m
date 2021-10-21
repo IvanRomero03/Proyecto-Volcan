@@ -53,10 +53,9 @@ hold on;
 %%%%%%%%%%% Euler %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %Determinar los parámetros iniciales para el *Método de Euler*
-%%%%%%%%%%%%Checar esto%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 t = 0;
 intervalo = 1;
-%%%%%% Falta conseguir un coeficiente de fricción %%%%%%%%
 b = 0.3;
 masa = randi([2 15],1);
 %Para y (altura)
@@ -149,7 +148,7 @@ while y(length(y)) > 0
 end
 
 %%%%%% TO DO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%%%%%% LISTOS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%% Marcar área de impacto %%%%%%%%%%%%%%%%%%%%%%%
 % Tomar las coordenadas de impacto y hacer un circulo con el área de
 % peligro en ese impacto
